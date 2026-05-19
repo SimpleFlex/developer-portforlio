@@ -1,26 +1,313 @@
+/* ── Google Fonts ── */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Hanken+Grotesk:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
+
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────────────
+   DESIGN SYSTEM — replaces tailwind.config.ts in v4
+   ───────────────────────────────────────────────────── */
+@theme {
+  /* ── Surface colors ── */
+  --color-surface: #131317;
+  --color-surface-dim: #131317;
+  --color-surface-bright: #39393d;
+  --color-surface-container-lowest: #0e0e12;
+  --color-surface-container-low: #1b1b1f;
+  --color-surface-container: #1f1f23;
+  --color-surface-container-high: #2a292e;
+  --color-surface-container-highest: #353439;
+  --color-surface-variant: #353439;
+  --color-background: #131317;
+
+  /* ── On-surface colors ── */
+  --color-on-surface: #e4e1e7;
+  --color-on-surface-variant: #c3c6d7;
+  --color-on-background: #e4e1e7;
+  --color-inverse-surface: #e4e1e7;
+  --color-inverse-on-surface: #303034;
+
+  /* ── Outline ── */
+  --color-outline: #8d90a0;
+  --color-outline-variant: #434655;
+
+  /* ── Primary — Electric Blue ── */
+  --color-primary: #b4c5ff;
+  --color-on-primary: #002a78;
+  --color-primary-container: #2563eb;
+  --color-on-primary-container: #eeefff;
+  --color-inverse-primary: #0053db;
+  --color-primary-fixed: #dbe1ff;
+  --color-primary-fixed-dim: #b4c5ff;
+  --color-on-primary-fixed: #00174b;
+  --color-on-primary-fixed-variant: #003ea8;
+  --color-surface-tint: #b4c5ff;
+
+  /* ── Secondary — Cyan ── */
+  --color-secondary: #4cd7f6;
+  --color-on-secondary: #003640;
+  --color-secondary-container: #03b5d3;
+  --color-on-secondary-container: #00424e;
+  --color-secondary-fixed: #acedff;
+  --color-secondary-fixed-dim: #4cd7f6;
+  --color-on-secondary-fixed: #001f26;
+  --color-on-secondary-fixed-variant: #004e5c;
+
+  /* ── Tertiary — Violet ── */
+  --color-tertiary: #d2bbff;
+  --color-on-tertiary: #3f008e;
+  --color-tertiary-container: #8343f4;
+  --color-on-tertiary-container: #f7edff;
+  --color-tertiary-fixed: #eaddff;
+  --color-tertiary-fixed-dim: #d2bbff;
+  --color-on-tertiary-fixed: #25005a;
+  --color-on-tertiary-fixed-variant: #5a00c6;
+
+  /* ── Error ── */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* ── Typography ── */
+  --font-display: "Hanken Grotesk", sans-serif;
+  --font-headline: "Hanken Grotesk", sans-serif;
+  --font-body: "Geist", sans-serif;
+  --font-code: "Geist", monospace;
+
+  --text-display-xl: 72px;
+  --text-display-xl--line-height: 80px;
+  --text-display-xl--letter-spacing: -0.04em;
+  --text-display-xl--font-weight: 700;
+
+  --text-headline-lg: 48px;
+  --text-headline-lg--line-height: 56px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-lg-mobile: 36px;
+  --text-headline-lg-mobile--line-height: 44px;
+  --text-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 40px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 32px;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 28px;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 16px;
+  --text-label-caps--letter-spacing: 0.15em;
+  --text-label-caps--font-weight: 600;
+
+  --text-code-sm: 14px;
+  --text-code-sm--line-height: 24px;
+
+  /* ── Spacing ── */
+  --spacing-unit: 8px;
+  --spacing-gutter: 32px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 24px;
+  --spacing-section-gap: 120px;
+
+  /* ── Border radius ── */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Max width ── */
+  --width-container-max: 1280px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────────────
+   BASE STYLES
+   ───────────────────────────────────────────────────── */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+  color: var(--color-secondary);
+}
+
+/* ─────────────────────────────────────────────────────
+   REUSABLE COMPONENT CLASSES
+   ───────────────────────────────────────────────────── */
+
+/* Material Symbols icon font */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Glassmorphism panel */
+.glass-panel {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Bento card — glass + cyan hover glow */
+.bento-card {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bento-card:hover {
+  border-color: rgba(76, 215, 246, 0.5);
+  box-shadow: 0 0 40px rgba(76, 215, 246, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Gradient CTA button */
+.btn-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #8343f4 100%);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  border-radius: var(--radius-full);
+  padding: 1rem 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  border: none;
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+}
+
+/* Nav link — animated cyan underline */
+.nav-link {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-on-surface-variant);
+  transition: color 0.2s ease;
+  padding-bottom: 4px;
+  text-decoration: none;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-link:hover {
+  color: var(--color-on-surface);
+}
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+  transform: none;
+}
+
+/* Nav link — active (current page) */
+.nav-link-active {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-secondary);
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 4px;
+  text-decoration: none;
+}
+
+/* Terminal glass block */
+.terminal-glass {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Contact form input — bottom border only */
+.input-line {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-outline-variant);
+  padding: 16px 0;
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.input-line:focus {
+  border-bottom-color: var(--color-secondary);
+}
+
+.input-focus-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--color-secondary);
+  transition: width 0.4s ease;
+}
+input:focus ~ .input-focus-line,
+textarea:focus ~ .input-focus-line {
+  width: 100%;
+}
+
+/* ── Glow utilities ── */
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(76, 215, 246, 0.2);
+}
+.glow-blue {
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+}
+.glow-violet {
+  box-shadow: 0 0 30px rgba(131, 67, 244, 0.3);
 }
