@@ -1,3 +1,32 @@
+import Link from "next/link";
+
+const socials = [
+  {
+    label: "GitHub",
+    icon: "code",
+    color: "var(--color-primary)",
+    href: "https://github.com",
+  },
+  {
+    label: "LinkedIn",
+    icon: "business",
+    color: "var(--color-secondary)",
+    href: "https://linkedin.com",
+  },
+  {
+    label: "Twitter",
+    icon: "tag",
+    color: "var(--color-tertiary)",
+    href: "https://twitter.com",
+  },
+  {
+    label: "Instagram",
+    icon: "photo_camera",
+    color: "var(--color-primary)",
+    href: "https://instagram.com",
+  },
+];
+
 export default function ContactInfo() {
   return (
     <div className="space-y-5">
@@ -65,7 +94,7 @@ export default function ContactInfo() {
         </p>
       </div>
 
-      {/* Socials */}
+      {/* Socials — CSS hover only, no JS handlers */}
       <div className="bento-card p-5 rounded-2xl">
         <span
           className="text-xs font-semibold tracking-widest uppercase block mb-4"
@@ -74,38 +103,13 @@ export default function ContactInfo() {
           CONNECT
         </span>
         <div className="grid grid-cols-2 gap-2">
-          {[
-            {
-              label: "GitHub",
-              icon: "code",
-              color: "var(--color-primary)",
-              href: "https://github.com",
-            },
-            {
-              label: "LinkedIn",
-              icon: "business",
-              color: "var(--color-secondary)",
-              href: "https://linkedin.com",
-            },
-            {
-              label: "Twitter",
-              icon: "tag",
-              color: "var(--color-tertiary)",
-              href: "https://twitter.com",
-            },
-            {
-              label: "Instagram",
-              icon: "photo_camera",
-              color: "var(--color-primary)",
-              href: "https://instagram.com",
-            },
-          ].map(({ label, icon, color, href }) => (
-            <a
+          {socials.map(({ label, icon, color, href }) => (
+            <Link
               key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 p-3 rounded-xl transition-all duration-200 hover:bg-white/5 group"
+              className="group flex items-center gap-2 p-3 rounded-xl transition-all duration-200 hover:bg-white/5"
               style={{ border: "1px solid rgba(255,255,255,0.05)" }}
             >
               <span
@@ -115,19 +119,12 @@ export default function ContactInfo() {
                 {icon}
               </span>
               <span
-                className="text-sm transition-colors"
+                className="text-sm transition-colors duration-200 group-hover:text-white"
                 style={{ color: "var(--color-on-surface-variant)" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--color-on-surface)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color =
-                    "var(--color-on-surface-variant)")
-                }
               >
                 {label}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
